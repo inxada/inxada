@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+@layer base {
+  :root {
+    /* Dark fantasy RPG theme */
+    --background: 20 14% 8%;
+    --foreground: 40 30% 90%;
+
+    --card: 20 12% 12%;
+    --card-foreground: 40 30% 90%;
+
+    --popover: 20 14% 10%;
+    --popover-foreground: 40 30% 90%;
+
+    --primary: 38 72% 50%;
+    --primary-foreground: 20 14% 8%;
+
+    --secondary: 15 20% 18%;
+    --secondary-foreground: 40 30% 90%;
+
+    --muted: 20 10% 20%;
+    --muted-foreground: 30 15% 55%;
+
+    --accent: 0 60% 40%;
+    --accent-foreground: 40 30% 90%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 40 30% 90%;
+
+    --border: 30 20% 22%;
+    --input: 30 20% 18%;
+    --ring: 38 72% 50%;
+
+    --radius: 0.5rem;
+
+    /* Custom RPG colors */
+    --gold: 38 72% 50%;
+    --gold-light: 40 65% 65%;
+    --gold-dark: 35 75% 35%;
+    --blood: 0 60% 35%;
+    --blood-light: 0 55% 50%;
+    --parchment: 35 40% 85%;
+    --parchment-dark: 30 25% 70%;
+    --shadow: 20 15% 6%;
+    --health: 120 50% 40%;
+    --sanity: 210 60% 50%;
+    --reality: 280 60% 50%;
+    
+    /* Injury colors */
+    --injury-none: 120 50% 40%;
+    --injury-light: 45 80% 50%;
+    --injury-moderate: 25 80% 50%;
+    --injury-critical: 0 70% 50%;
+    --injury-disabled: 0 0% 40%;
+
+    --sidebar-background: 20 12% 10%;
+    --sidebar-foreground: 40 30% 90%;
+    --sidebar-primary: 38 72% 50%;
+    --sidebar-primary-foreground: 20 14% 8%;
+    --sidebar-accent: 15 20% 18%;
+    --sidebar-accent-foreground: 40 30% 90%;
+    --sidebar-border: 30 20% 22%;
+    --sidebar-ring: 38 72% 50%;
+  }
+
+  .dark {
+    --background: 20 14% 8%;
+    --foreground: 40 30% 90%;
+    --card: 20 12% 12%;
+    --card-foreground: 40 30% 90%;
+    --popover: 20 14% 10%;
+    --popover-foreground: 40 30% 90%;
+    --primary: 38 72% 50%;
+    --primary-foreground: 20 14% 8%;
+    --secondary: 15 20% 18%;
+    --secondary-foreground: 40 30% 90%;
+    --muted: 20 10% 20%;
+    --muted-foreground: 30 15% 55%;
+    --accent: 0 60% 40%;
+    --accent-foreground: 40 30% 90%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 40 30% 90%;
+    --border: 30 20% 22%;
+    --input: 30 20% 18%;
+    --ring: 38 72% 50%;
+    --sidebar-background: 20 12% 10%;
+    --sidebar-foreground: 40 30% 90%;
+    --sidebar-primary: 38 72% 50%;
+    --sidebar-primary-foreground: 20 14% 8%;
+    --sidebar-accent: 15 20% 18%;
+    --sidebar-accent-foreground: 40 30% 90%;
+    --sidebar-border: 30 20% 22%;
+    --sidebar-ring: 38 72% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-image: 
+      radial-gradient(ellipse at top, hsl(20 14% 12%) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, hsl(0 60% 10% / 0.3) 0%, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .rpg-card {
+    @apply bg-card border border-border rounded-lg shadow-xl;
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--card)) 0%,
+      hsl(20 12% 10%) 100%
+    );
+    box-shadow: 
+      0 4px 20px -5px hsl(var(--shadow)),
+      inset 0 1px 0 hsl(var(--gold) / 0.1);
+  }
+
+  .rpg-input {
+    @apply bg-input border border-border rounded px-3 py-2 text-foreground;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary;
+    @apply placeholder:text-muted-foreground;
+  }
+
+  .rpg-button-primary {
+    @apply bg-primary text-primary-foreground px-4 py-2 rounded font-display;
+    @apply hover:brightness-110 transition-all duration-200;
+    @apply shadow-lg shadow-primary/20;
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--gold-light)) 0%,
+      hsl(var(--gold)) 50%,
+      hsl(var(--gold-dark)) 100%
+    );
+  }
+
+  .rpg-button-secondary {
+    @apply bg-secondary text-secondary-foreground px-4 py-2 rounded font-display;
+    @apply border border-border hover:bg-muted transition-all duration-200;
+  }
+
+  .rpg-button-accent {
+    @apply bg-accent text-accent-foreground px-4 py-2 rounded font-display;
+    @apply hover:brightness-110 transition-all duration-200;
+    @apply shadow-lg shadow-accent/20;
+  }
+
+  .stat-bar {
+    @apply h-4 rounded-full overflow-hidden bg-muted relative;
+    box-shadow: inset 0 2px 4px hsl(var(--shadow) / 0.5);
+  }
+
+  .stat-bar-fill {
+    @apply h-full transition-all duration-500 ease-out;
+    box-shadow: 0 0 10px currentColor;
+  }
+
+  .stat-bar-health .stat-bar-fill {
+    background: linear-gradient(90deg, hsl(var(--health)) 0%, hsl(140 50% 50%) 100%);
+  }
+
+  .stat-bar-sanity .stat-bar-fill {
+    background: linear-gradient(90deg, hsl(var(--sanity)) 0%, hsl(220 60% 60%) 100%);
+  }
+
+  .stat-bar-reality .stat-bar-fill {
+    background: linear-gradient(90deg, hsl(var(--reality)) 0%, hsl(300 60% 60%) 100%);
+  }
+
+  .dice-roll {
+    @apply inline-flex items-center justify-center w-12 h-12 rounded-lg;
+    @apply bg-primary text-primary-foreground font-display text-lg font-bold;
+    @apply cursor-pointer hover:scale-110 transition-transform duration-200;
+    @apply shadow-lg shadow-primary/30;
+  }
+
+  .dice-roll:active {
+    animation: roll 0.3s ease-out;
+  }
+
+  .body-part {
+    @apply cursor-pointer transition-all duration-200;
+    @apply hover:brightness-125;
+  }
+
+  .body-part-nenhum {
+    fill: hsl(var(--injury-none));
+  }
+
+  .body-part-leve {
+    fill: hsl(var(--injury-light));
+  }
+
+  .body-part-moderado {
+    fill: hsl(var(--injury-moderate));
+  }
+
+  .body-part-critico {
+    fill: hsl(var(--injury-critical));
+  }
+
+  .body-part-inutilizavel {
+    fill: hsl(var(--injury-disabled));
+  }
+
+  .tab-active {
+    @apply border-b-2 border-primary text-primary;
+  }
+
+  .character-card {
+    @apply rpg-card p-6 cursor-pointer;
+    @apply hover:border-primary/50 hover:shadow-primary/10 transition-all duration-300;
+  }
+
+  .talent-card {
+    @apply rpg-card p-4;
+    @apply hover:border-primary/30 transition-all duration-200;
+  }
+
+  .inventory-item {
+    @apply rpg-card p-4;
+    @apply hover:border-primary/30 transition-all duration-200;
+  }
+
+  .rarity-comum {
+    @apply text-foreground;
+  }
+
+  .rarity-incomum {
+    @apply text-green-400;
+  }
+
+  .rarity-raro {
+    @apply text-blue-400;
+  }
+
+  .rarity-epico {
+    @apply text-purple-400;
+  }
+
+  .rarity-lendario {
+    @apply text-amber-400;
+    text-shadow: 0 0 10px hsl(var(--gold) / 0.5);
+  }
+}
+
+@keyframes roll {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-15deg) scale(1.1); }
+  50% { transform: rotate(15deg) scale(1.15); }
+  75% { transform: rotate(-10deg) scale(1.1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
